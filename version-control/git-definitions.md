@@ -17,3 +17,7 @@ A commit is a way to tell git: "This change/file has been edited, tested and is 
 * What is a merge conflict?
 
 When a file or more contain conflicting changes. For example, changes were made possibly by 2 people creating branches at the same time and then edited the same file and lines of code.
+
+##Notes
+
+A note for my advisor... (1.5 Release 2 task)
