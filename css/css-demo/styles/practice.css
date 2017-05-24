@@ -1,0 +1,23 @@
+
+#contact-info {
+  font-size: .8em;
+}
+
+.job:hover {
+  background-color: silver;
+}
+.job {
+  background-color: #e9e5dc;
+  border-radius: 10px;
+  padding: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.accomplishments {
+  font-size: .8em;
+}
+
+section > h2 {
+  background-color: pink;
+}
