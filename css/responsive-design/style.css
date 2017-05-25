@@ -45,4 +45,30 @@ figcaption {
 
 body {
   max-width: 960px;
+  position: fixed;
+  top: 0;
+  right: 0;
 }
+
+@media screen and (max-width: 400px){
+  h1{
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 350px){
+  #external-links {
+    width: 100%;
+    display: block;
+  }
+
+  main {
+    width: 100%;
+  }
+}
+
+/*@media screen and (max-width: 500px) {
+  body {
+    background-color: hotpink;
+  }
+}*/
