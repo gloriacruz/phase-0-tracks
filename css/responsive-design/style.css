@@ -14,8 +14,20 @@ cite {
   padding-left: 0px;
 }
 
+#external-links {
+  width: 20%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+main {
+  width: 70%;
+  display: inline-block;
+  padding-left: 10px;
+}
+
 /* you're welcome to edit the
-image, figure, and figcaption CSS if you'd like, 
+image, figure, and figcaption CSS if you'd like,
 but it's optional! */
 img {
   width: 100%;
@@ -30,3 +42,33 @@ figcaption {
   font-style: italic;
   text-align: right;
 }
+
+body {
+  max-width: 960px;
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+@media screen and (max-width: 400px){
+  h1{
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 350px){
+  #external-links {
+    width: 100%;
+    display: block;
+  }
+
+  main {
+    width: 100%;
+  }
+}
+
+/*@media screen and (max-width: 500px) {
+  body {
+    background-color: hotpink;
+  }
+}*/
