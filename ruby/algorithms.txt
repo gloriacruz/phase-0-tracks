@@ -23,3 +23,46 @@ If there is enough space in the elevator for you
 Otherwise
   Wait until next elevator
 End
+
+
+*RELEASE 1
+
+-Drive to my daughter's school
+
+Wait until is 3:40pm
+Get into my car and put the seat belt on
+Start the car
+While pedestrians behind or around
+  Wait for them to move
+Star driving along Baffin St
+Reach Baffin St & Edgewater Blvd intersection
+Until no cars in front of me
+  Wait
+Advance and make a full stop
+Wait 5 seconds
+Until it's my turn to move
+  Wait
+Turn right
+Drive along Edgewater Blvd at 35 mph
+Reach Edgewater Blvd & Beach Park Blvd intersection
+If light is green
+  Continue
+Otherwise
+  Wait until light is green
+  Continue
+Keep driving along Edgewater Blvd at 35 mph
+Reach Edgewater Blvd & Hillsdale Blvd intersection
+If light is green
+  Turn right
+Otherwise
+  Wait until light is green or (no more cars in front of me and no pedestrians crossing)
+  Turn right
+Keep driving along Hillsdale Blvd at 40 mph
+Reach Hillsdale Blvd & Foster City Blvd intersection
+If light is green
+  Continue
+Otherwise
+  Wait until light is green
+  Continue
+Park at destination
+End
