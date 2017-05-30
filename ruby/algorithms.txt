@@ -1,0 +1,68 @@
+*RELEASE 0
+
+-Assuming robot's settings saved the floor in which we live in
+-Assuming robot is waiting outside of the elevator
+
+Wait until elevator arrives and door opens
+If there is people waiting for the elevator before you
+  Leave other people in first
+If there is enough space in the elevator for you
+  Step in
+  Reach for the button panel
+  Until appropriate floor button is found
+    For each button on the panel use camera and character recognition to scan
+      If symbol/number in button is equal to desired floor
+        Button is found
+        Press button
+        Stop scanning buttons
+        Wait until elevator stops on a floor
+        If this is my desired floor
+          Step out
+        Otherwise
+          Play elevator music
+Otherwise
+  Wait until next elevator
+End
+
+
+*RELEASE 1
+
+-Drive to my daughter's school
+
+Wait until is 3:40pm
+Get into my car and put the seat belt on
+Start the car
+While pedestrians behind or around
+  Wait for them to move
+Star driving along Baffin St
+Reach Baffin St & Edgewater Blvd intersection
+Until no cars in front of me
+  Wait
+Advance and make a full stop
+Wait 5 seconds
+Until it's my turn to move
+  Wait
+Turn right
+Drive along Edgewater Blvd at 35 mph
+Reach Edgewater Blvd & Beach Park Blvd intersection
+If light is green
+  Continue
+Otherwise
+  Wait until light is green
+  Continue
+Keep driving along Edgewater Blvd at 35 mph
+Reach Edgewater Blvd & Hillsdale Blvd intersection
+If light is green
+  Turn right
+Otherwise
+  Wait until light is green or (no more cars in front of me and no pedestrians crossing)
+  Turn right
+Keep driving along Hillsdale Blvd at 40 mph
+Reach Hillsdale Blvd & Foster City Blvd intersection
+If light is green
+  Continue
+Otherwise
+  Wait until light is green
+  Continue
+Park at destination
+End
