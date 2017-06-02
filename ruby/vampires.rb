@@ -1,30 +1,36 @@
 def load_employee_data
-  puts "What is your name?"
-  name = gets.chomp
-  puts "How old are you?"
-  age = gets.to_i
-  puts "What year were you born?"
-  year = gets.to_i
-  puts "Our company cafeteria serves garlic bread. Should we order some for you? (y/n)"
-  if gets.chomp == "y"
-    eats_garlic = true
-  else
-    eats_garlic = false
-  end
-  puts "Would you like to enroll in the company’s health insurance? (y/n)"
-  if gets.chomp == "y"
-    health_insurance = true
-  else
-    health_insurance = false
-  end
+  puts "How many employees will be processed?"
+  count = gets.to_i
+  until count == 0
+    puts "What is your name?"
+    name = gets.chomp
+    puts "How old are you?"
+    age = gets.to_i
+    puts "What year were you born?"
+    year = gets.to_i
+    puts "Our company cafeteria serves garlic bread. Should we order some for you? (y/n)"
+    if gets.chomp == "y"
+      eats_garlic = true
+    else
+      eats_garlic = false
+    end
+    puts "Would you like to enroll in the company’s health insurance? (y/n)"
+    if gets.chomp == "y"
+      health_insurance = true
+    else
+      health_insurance = false
+    end
 
-  puts "Employee Name: #{name}"
-  puts "Age: #{age}"
-  puts "Birth year: #{year}"
-  puts "Eats garlic: #{eats_garlic}"
-  puts "Wants health insurance: #{health_insurance}"
-  puts "Vampire status: " + check_vampire_status(name,age,year,eats_garlic,health_insurance)
-
+    puts "-----------------------"
+    puts "Employee Name: #{name}"
+    puts "Age: #{age}"
+    puts "Birth year: #{year}"
+    puts "Eats garlic: #{eats_garlic}"
+    puts "Wants health insurance: #{health_insurance}"
+    puts "Vampire status: " + check_vampire_status(name,age,year,eats_garlic,health_insurance)
+    puts "-----------------------"
+    count = count - 1
+  end
 end
 
 def calculate_age(year)
