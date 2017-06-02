@@ -1,7 +1,9 @@
 def load_employee_data
   puts "How many employees will be processed?"
   count = gets.to_i
-  until count == 0
+
+  until count >= 0
+    # Capture basic info
     puts "What is your name?"
     name = gets.chomp
     puts "How old are you?"
@@ -21,13 +23,32 @@ def load_employee_data
       health_insurance = false
     end
 
+    # Check vampire status with info provided so far
+    vampire_status = check_vampire_status(name,age,year,eats_garlic,health_insurance)
+
+    # Check for allergies and update vampire status if needed
+    more_allergies = true
+    while more_allergies == true
+      puts "Name any allergie (To finish type word: done)"
+      allergie = gets.chomp
+      if allergie == ("done" || "Done")
+        more_allergies = false
+      else
+        if allergie == ("sunshine" || "Sunshine") && (vampire_status == "Probably not a vampire" || vampire_status == "Results inconclusive")
+          # I'm only updating when the previous results where nagative or inconclusive
+          vampire_status = "Probably a vampire"
+          more_allergies = false
+        end
+      end
+    end
+
     puts "-----------------------"
     puts "Employee Name: #{name}"
     puts "Age: #{age}"
     puts "Birth year: #{year}"
     puts "Eats garlic: #{eats_garlic}"
     puts "Wants health insurance: #{health_insurance}"
-    puts "Vampire status: " + check_vampire_status(name,age,year,eats_garlic,health_insurance)
+    puts "Vampire status: #{vampire_status}"
     puts "-----------------------"
     count = count - 1
   end
