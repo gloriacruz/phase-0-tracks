@@ -2,7 +2,7 @@ def load_employee_data
   puts "How many employees will be processed?"
   count = gets.to_i
 
-  until count >= 0
+  until count <= 0
     # Capture basic info
     puts "What is your name?"
     name = gets.chomp
@@ -52,6 +52,8 @@ def load_employee_data
     puts "-----------------------"
     count = count - 1
   end
+
+  puts "Actually, never mind! What do these questions have to do with anything? Let's all be friends."
 end
 
 def calculate_age(year)
