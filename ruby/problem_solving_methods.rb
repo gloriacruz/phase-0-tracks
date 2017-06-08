@@ -62,6 +62,48 @@ p fib(7)
 p fib(98) + fib(99)
 p fib(100)
 
+# RELEASE 2
+# Choose a simple sorting algorithm to learn about. Bubble sort or insertion sort are good ones for beginners.
+# Pseudocode a sorting method that takes an array of integers and uses a sorting algorithm. The method should return a sorted version of the array. Your pseudocode should not be Ruby-specific.
+# Implement the sorting method in Ruby.
+
+# Pseudocoding using Bubble Sort:
+# Determine the length of array
+# Include a swap flag to notify program if swap is true or false
+# Initialize loop for swaps
+#   Iterate array until last value of array
+#     If value is out of order swap them
+#     Make a note that the swap occurred
+# Swap is complete once the method returns a sorted version of the array
+
+def bubble_sort(arr)
+  size = arr.length
+  swap = true
+  until swap == false
+    swap = false
+    arr.each do |item|
+      if arr[arr.index(item)+1] != nil #handle edge case at the end of the array
+        if arr[arr.index(item)] > arr[arr.index(item)+1]
+          small_value =  arr[arr.index(item)+1]
+          arr[arr.index(item)+1] = arr[arr.index(item)]
+          arr[arr.index(item)] = small_value
+          swap = true
+        end
+      end
+    end
+  end
+  arr
+end
+
+arr = [100,22,11,92,22,199,66,78]
+p bubble_sort(arr)
+arr = [100]
+p bubble_sort(arr)
+arr = [100,0]
+p bubble_sort(arr)
+arr = [1,2,3]
+p bubble_sort(arr)
+
 
 
 
