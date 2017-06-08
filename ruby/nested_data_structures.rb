@@ -1,14 +1,14 @@
 mty_aquarium_map = {
   first_floor: {
     oceans_edge: {
-      name: 'The oceans edge',
+      name: 'The ocean\'s edge',
       indoor_sections: [
         'Kelp Forest',
         'Sea Otters',
         'Touch Pools',
         'Aviary',
         'Octopus',
-        'Store'
+        'Gift Store'
         ],
       outdoor_sections: [
         'Great Tide Pool',
@@ -65,3 +65,21 @@ mty_aquarium_map = {
     }
   }
 }
+
+puts 'Return the full name of the first floor special exhibition'
+p mty_aquarium_map[:first_floor][:special_exhibit][:name]
+
+puts 'What are the sections on the first floor Ocean\'s Edge room?'
+p mty_aquarium_map[:first_floor][:oceans_edge][:indoor_sections] + mty_aquarium_map[:first_floor][:oceans_edge][:outdoor_sections]
+
+puts 'How many seats are in the cafeteria?'
+p mty_aquarium_map[:first_floor][:oceans_edge][:cafeteria][:seats]
+
+puts 'Mention two sections of the Splash Zone'
+p mty_aquarium_map[:second_floor][:splash_zone][:indoor_sections][0..1]
+
+puts 'Add a bathroom to The Open Sea exhibition'
+p mty_aquarium_map[:second_floor][:open_sea][:bathrooms] = mty_aquarium_map[:second_floor][:open_sea][:bathrooms] + 1
+
+puts 'Add a gift store to the Splash Zone sections'
+p mty_aquarium_map[:second_floor][:splash_zone][:indoor_sections].push('Gift Store')
