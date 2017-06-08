@@ -23,8 +23,13 @@ def search_array(arr,num)
 end
 
 arr = [1, 42, 89, 23, 45]
+# search for last number in array
 p search_array(arr, 45)
+# search for first number in array
 p search_array(arr, 1)
+# search for middle number in array
+p search_array(arr, 89)
+# search for a number not found
 p search_array(arr, 22)
 
 # RELEASE 1
@@ -54,11 +59,14 @@ def fib(num)
 
 end
 
+# Special cases
 p fib(0)
 p fib(1)
 p fib(2)
+# Cases with small numbers
 p fib(6)
 p fib(7)
+# Cases with big numbers. When fib(100)=fib(98)+fib(99)
 p fib(98) + fib(99)
 p fib(100)
 
@@ -95,13 +103,20 @@ def bubble_sort(arr)
   arr
 end
 
+# Normal array with repeated number
 arr = [100,22,11,92,22,199,66,78]
 p bubble_sort(arr)
+# A single item array
 arr = [100]
 p bubble_sort(arr)
+# Two items array in inverted order
 arr = [100,0]
 p bubble_sort(arr)
+# Array already sorted
 arr = [1,2,3]
+p bubble_sort(arr)
+# Array in fully inverted order
+arr = [9,8,7,6,5,4,3,2,1,0]
 p bubble_sort(arr)
 
 
