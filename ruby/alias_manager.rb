@@ -50,9 +50,17 @@ def make_alias(real_name)
     end
   end
   fake_name = new_letters.join('')
-  p fake_name
   fake_name = fake_name.split.map { |i| i.capitalize }.join(' ')
-  p "The alias name is: #{fake_name}"
 end
 
-make_alias("Felicia Torrez")
+loop do
+  puts "Enter agent's real name (type 'quit' to finish)"
+  real_name = gets.chomp
+  if real_name.downcase == "quit"
+    break
+  else
+    puts "The real name is: #{real_name}"
+    puts "The alias name is: #{make_alias(real_name)}"
+    puts "------------------------------"
+  end
+end
