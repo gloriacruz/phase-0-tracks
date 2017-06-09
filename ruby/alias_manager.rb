@@ -53,14 +53,21 @@ def make_alias(real_name)
   fake_name = fake_name.split.map { |i| i.capitalize }.join(' ')
 end
 
+agents = {}
 loop do
   puts "Enter agent's real name (type 'quit' to finish)"
   real_name = gets.chomp
   if real_name.downcase == "quit"
     break
   else
-    puts "The real name is: #{real_name}"
-    puts "The alias name is: #{make_alias(real_name)}"
-    puts "------------------------------"
+    fake_name = make_alias(real_name)
+    agents[real_name] = fake_name
+    # puts "The real name is: #{real_name}"
+    # puts "The alias name is: #{fake_name}"
+    # puts "------------------------------"
   end
 end
+puts "-------------------------------"
+puts "List of Agent Information below"
+puts "-------------------------------"
+agents.each { |agent_name, agent_alias| puts "* #{agent_name} is also known as #{agent_alias}" }
