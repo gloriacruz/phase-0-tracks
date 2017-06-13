@@ -13,3 +13,4 @@
 # Play
 # Walk
 # Chew
+# Bark
