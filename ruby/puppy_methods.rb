@@ -1,5 +1,9 @@
 class Puppy
 
+  def initialize
+  	puts "Initializing a new puppy instance..."
+  end
+
   def fetch(toy)
     puts "I brought back the #{toy}!"
     toy
@@ -30,5 +34,7 @@ fido.speak(3)
 fido.roll_over
 fido.dog_years(3)
 fido.hi5
+
+
 
 
