@@ -97,3 +97,18 @@ puts new_list
 print_list(new_list)
 
 
+# Release 4: Reflect
+
+# What did you learn about pseudocode from working on this challenge?
+# R: That is not only necessary to specify the steps of the method but it's also important to specify input and output.
+# What are the tradeoffs of using arrays and hashes for this challenge?
+# R: The array can hold less information, in this case we needed a complex structure that could hold not only a list, but more info about each items.
+# What does a method return?
+# R: You can have a specific return action and return a any variable, hash or array, or you can use implicit return and in that case, the value returned depends on the last variable operation.
+# What kind of things can you pass into methods as arguments?
+# R: any data type or structure: arrays, hashes, strings, numbers, blocks, etc.
+# How can you pass information between methods?
+# R: by declaring input parameters in your methods
+# What concepts were solidified in this challenge, and what concepts are still confusing?
+# R: refactor, pseudocode, parameters, code blocks were solidified. Still a little confused about a hash passed as parameter being permanently modified without the need of an assigment to a new variable.
+
