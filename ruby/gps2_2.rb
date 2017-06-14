@@ -5,7 +5,7 @@
   # Iterate through the list that the user provides
   # Save each item that you iterate through to the hash
   # Set default quantity to 1 and assign that to each that you iterate through
-  # print the list to the console (optional for testing)
+  # Print the list to the console (optional for testing)
 # output: a hash with the list
 
 
@@ -25,7 +25,7 @@ end
 # steps: add new items into list
 # output: updated list
 
-def add_item (grocery_list, item, quantity)
+def add_item (grocery_list, item, quantity = 1)
 	grocery_list[item] = quantity
 	return grocery_list
 end
@@ -104,11 +104,11 @@ print_list(new_list)
 # What are the tradeoffs of using arrays and hashes for this challenge?
 # R: The array can hold less information, in this case we needed a complex structure that could hold not only a list, but more info about each items.
 # What does a method return?
-# R: You can have a specific return action and return a any variable, hash or array, or you can use implicit return and in that case, the value returned depends on the last variable operation.
+# R: You can have a specific return action and return any variable, hash or array, or you can use implicit return and in that case, the value returned depends on the last variable operation.
 # What kind of things can you pass into methods as arguments?
 # R: any data type or structure: arrays, hashes, strings, numbers, blocks, etc.
 # How can you pass information between methods?
 # R: by declaring input parameters in your methods
 # What concepts were solidified in this challenge, and what concepts are still confusing?
-# R: refactor, pseudocode, parameters, code blocks were solidified. Still a little confused about a hash passed as parameter being permanently modified without the need of an assigment to a new variable.
+# R: refactor, pseudocode, parameters, code blocks were solidified. Still a little confused about a hash passed as parameter being permanently modified without the need of an assigment to a new hash variable.
 
