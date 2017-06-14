@@ -30,8 +30,8 @@ def add_item (grocery_list, item, quantity)
 	return grocery_list
 end
 
-# my_updated_list = add_item(my_list, "water", 2)
-# puts my_updated_list
+# add_item(my_list, "water", 2)
+# puts my_list
 
 
 # Method to remove an item from the list
@@ -44,8 +44,8 @@ def remove_item (grocery_list, item)
 	return grocery_list
 end
 
-# my_updated_list = remove_item(my_updated_list, "pizza")
-# puts my_updated_list
+# remove_item(my_list, "pizza")
+# puts my_list
 
 
 # Method to update the quantity of an item
@@ -58,8 +58,8 @@ def update_quantity (grocery_list, item, quantity)
 	return grocery_list
 end
 
-# my_updated_list = update_quantity(my_updated_list, "apples", 3)
-# puts my_updated_list
+# update_quantity(my_list, "apples", 3)
+# puts my_list
 
 
 # Method to print a list and make it look pretty
@@ -71,11 +71,11 @@ end
 def print_list (grocery_list)
 	puts "My Grocery List"
 	puts "---------------"
-	puts "Item              Quantity"
-	grocery_list.each {|item, quantity| puts "#{item}              #{quantity}"} 
+	puts "Item                Quantity"
+	grocery_list.each { |item, quantity| puts item.ljust(20) + "#{quantity}" } 
 end
 
-# print_list(my_updated_list)
+# print_list(my_list)
 
 
 
