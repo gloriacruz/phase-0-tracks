@@ -1,15 +1,7 @@
 class Santa
 
-  attr_reader :age, :ethnicity
-  attr_accessor :gender
-
-  def speak
-    puts "Ho, ho, ho! Haaaappy holidays!"
-  end
-
-  def eat_milk_and_cookies(cookie_type)
-    puts "That was a good #{cookie_type}!"
-  end
+  attr_reader :ethnicity, :reindeer_ranking
+  attr_accessor :age, :gender
 
   def initialize(gender, ethnicity)
     @gender = gender
@@ -17,7 +9,15 @@ class Santa
     @reindeer_ranking = ["Rudolph", "Dasher", "Dancer", "Prancer", "Vixen", "Comet", "Cupid", "Donner", "Blitzen"]
     @age = 0
 
-    puts "Initializing Santa instance: #{@gender} and #{@ethnicity}..."
+    # puts "Initializing Santa instance: #{@gender} and #{@ethnicity}..."
+  end
+
+  def speak
+    puts "Ho, ho, ho! Haaaappy holidays!"
+  end
+
+  def eat_milk_and_cookies(cookie_type)
+    puts "That was a good #{cookie_type}!"
   end
 
   # Age Santa by one year
@@ -63,10 +63,29 @@ end
 # genders.each { |gender| santas << Santa.new(gender,ethnicities.sample) }
 
 
-# D R I V E R  C O D E - RELEASE 2
-my_santa = Santa.new("male", "black")
-50.times { |year| my_santa.celebrate_birthday }
-puts "Santa is #{my_santa.age} years old"
-puts "Santa is #{my_santa.ethnicity}"
-my_santa.get_mad_at("Vixen")
-my_santa.gender = "female"
+# D R I V E R  C O D E - RELEASE 2 & 3
+# my_santa = Santa.new("male", "black")
+# 50.times { |year| my_santa.celebrate_birthday }
+# puts "Santa is #{my_santa.age} years old"
+# puts "Santa is #{my_santa.ethnicity}"
+# my_santa.get_mad_at("Vixen")
+# my_santa.gender = "female"
+
+def santa_generator(total)
+  genders = ["agender", "female", "male", "bigender", "androgyne", "transgender", "gender fluid", "N/A"]
+  ethnicities = ["black", "Latino", "Hispanic", "white", "Asian", "Indian", "Native-American", "Arab", "Japanese-African", "prefer not to say", "Mystical Creature (unicorn)", "N/A"]
+
+  count =1
+  until count > total
+      this_santa = Santa.new(genders.sample, ethnicities.sample)
+      this_santa.age = rand(141) #rand(max) returns a random integer >= zero and less than max
+      puts "Santa no. #{count} / Age: #{this_santa.age} / Gender: #{this_santa.gender} / Ethnicity: #{this_santa.ethnicity}"
+      puts "Santa reindeer ranking: #{this_santa.reindeer_ranking}"
+      count += 1
+      puts "------------------------------------------------------"
+  end
+end
+
+# D R I V E R  C O D E - RELEASE 4
+# Creates 1000 santas
+santa_generator(1000)
