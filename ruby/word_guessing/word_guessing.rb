@@ -27,6 +27,7 @@ class Word_Guessing
   attr_accessor :prev_guesses, :current_state, :available_guesses
   attr_reader :secret_word, :is_over_won
 
+  # method to initialize the class
   def initialize(secret_word)
     puts "Initializing game for new secret word..."
     @secret_word = secret_word
@@ -37,31 +38,37 @@ class Word_Guessing
     @is_over_won = false
   end
 
+  # deducts 1 available guess
   def deduct_available_guesses
     @available_guesses -= 1
   end
 
+  # check if the guess is repeated
   def is_repeated_guess(guess)
     @prev_guesses.include? guess
   end
 
+  # check current status of the secret word, returns true if it is completed
   def is_word_complete()
     !@current_state.include? "_"
   end
 
+  # updates the current status by changing _ for letters that the user guessed
   def update_current_state(guess)
     start = 0
-    while @secret_word.index(guess, start) != nil
-      @current_state[@secret_word.index(guess,start)] = guess
-      start = @secret_word.index(guess,start) + 1
+    while (i = @secret_word.index(guess, start)) != nil
+      @current_state[i] = guess
+      start = i + 1
     end
     @current_state
   end
 
+  # add a guess to the previous guesses array to keep try of repeated guesses
   def add_to_previous_guesses(guess)
     prev_guesses << guess
   end
 
+  # try o test a guess agains the secret word
   def try_guess(guess)
     if !is_repeated_guess(guess)
       deduct_available_guesses
@@ -69,19 +76,11 @@ class Word_Guessing
     end
 
     if guess.length > 1
-      if @secret_word == guess
-          @is_over_won = true
-      else
-        false
-      end
+      @secret_word == guess ? @is_over_won = true : false
     elsif guess.length > 0
       if @secret_word.include? guess
         update_current_state(guess)
-        if !is_word_complete()
-          true
-        else
-          @is_over_won = true
-        end
+        !is_word_complete() ? true : @is_over_won = true
       else
         false
       end
@@ -94,31 +93,33 @@ end
 
 # DRIVER CODE
 # User Interface: driver code will handle input and output as far as the user is concerned
+# NoTe: For my game the user can try to guess the whole word at any time or try to guess letter by letter
+# Assumption: The secret word doesn't contain '_'
 
-# puts "Welcome to the word guessing game!"
-# puts "User1: What's the secret word?"
-# user1_input = gets.chomp
-# game = Word_Guessing.new(user1_input)
-# while game.available_guesses > 0 && !game.is_over_won
-#   puts "--------------------------------------------------"
-#   puts "#{game.available_guesses} attempts left"
-#   puts "Secret word (current state): #{game.current_state}"
-#   puts "User2: Can you guess the secret word? Type the word or guess a letter in the word"
-#   user2_input = gets.chomp
-#   if game.is_repeated_guess(user2_input)
-#     puts "Duplicated attempt!"
-#   end
+puts "Welcome to the word guessing game!"
+puts "User1: What's the secret word?"
+user1_input = gets.chomp
+game = Word_Guessing.new(user1_input)
+while game.available_guesses > 0 && !game.is_over_won
+  puts "--------------------------------------------------"
+  puts "#{game.available_guesses} attempts left"
+  puts "Secret word (current state): #{game.current_state}"
+  puts "User2: Can you guess the secret word? Type the word or guess a letter in the word"
+  user2_input = gets.chomp
+  if game.is_repeated_guess(user2_input)
+    puts "Duplicated attempt!"
+  end
 
-#   if game.try_guess(user2_input) && game.is_over_won
-#     puts "Congratulations! You've guessed the word: #{game.secret_word}"
-#   else
-#     puts "Secret word (current state): #{game.current_state}"
-#   end
-# end
+  if game.try_guess(user2_input) && game.is_over_won
+    puts "Congratulations! You've guessed the word: #{game.secret_word}"
+  else
+    puts "Secret word (current state): #{game.current_state}"
+  end
+end
 
-# if !game.is_word_complete() && !game.is_over_won
-#   puts "Sorry you couldn't guess the word! The secret word was: #{game.secret_word}"
-# end
+if !game.is_word_complete() && !game.is_over_won
+  puts "Sorry you couldn't guess the word! The secret word was: #{game.secret_word}"
+end
 
 
 
