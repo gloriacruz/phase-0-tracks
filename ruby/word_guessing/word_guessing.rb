@@ -24,8 +24,8 @@
 # -After all attempts are over and the word was not guessed PRINT "Sorry you couldn't guess the word! It was " and concatenate secret word.
 
 class Word_Guessing
-  attr_accessor :prev_guesses, :current_state
-  attr_reader :secret_word, :available_guesses, :is_over
+  attr_accessor :prev_guesses, :current_state, :available_guesses
+  attr_reader :secret_word, :is_over
 
   def initialize(secret_word)
     puts "Initializing game for new secret word..."
@@ -73,7 +73,7 @@ class Word_Guessing
       if @secret_word.include? guess
         update_current_state(guess)
         if !is_word_complete()
-          false
+          true
         else
           @is_over = true
         end
@@ -88,32 +88,33 @@ end
 # DRIVER CODE
 # User Interface: driver code will handle input and output as far as the user is concerned
 
-puts "Welcome to the word guessing game!"
-puts "User1: What's the secret word?"
-user1_input = gets.chomp
-game = Word_Guessing.new(user1_input)
-while game.available_guesses > 0 && !game.is_over
-  puts "--------------------------------------------------"
-  puts "Secret word (current state): #{game.current_state}"
-  puts "User2: Can you guess the secret word? Type the word or guess a letter in the word"
-  user2_input = gets.chomp
-  if game.is_repeated_guess(user2_input)
-    puts "Duplicated attemp!"
-  else
-    game.deduct_available_guesses
-    game.add_to_previous_guesses(user2_input)
-  end
+# puts "Welcome to the word guessing game!"
+# puts "User1: What's the secret word?"
+# user1_input = gets.chomp
+# game = Word_Guessing.new(user1_input)
+# while game.available_guesses > 0 && !game.is_over
+#   puts "--------------------------------------------------"
+#   puts "#{game.available_guesses} attempts left"
+#   puts "Secret word (current state): #{game.current_state}"
+#   puts "User2: Can you guess the secret word? Type the word or guess a letter in the word"
+#   user2_input = gets.chomp
+#   if game.is_repeated_guess(user2_input)
+#     puts "Duplicated attemp!"
+#   else
+#     game.deduct_available_guesses
+#     game.add_to_previous_guesses(user2_input)
+#   end
 
-  if game.try_guess(user2_input)
-    puts "Congratulations! You've guessed the word: #{game.secret_word}"
-  else
-    puts "Secret word (current state): #{game.current_state}"
-  end
-end
+#   if game.try_guess(user2_input) && game.is_over
+#     puts "Congratulations! You've guessed the word: #{game.secret_word}"
+#   else
+#     puts "Secret word (current state): #{game.current_state}"
+#   end
+# end
 
-if !game.is_word_complete && !game.is_over
-  puts "Sorry you couldn't guess the word! The secret word was: #{game.secret_word}"
-end
+# if !game.is_word_complete && !game.is_over
+#   puts "Sorry you couldn't guess the word! The secret word was: #{game.secret_word}"
+# end
 
 
 
