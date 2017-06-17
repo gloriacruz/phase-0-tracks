@@ -1,8 +1,8 @@
 require_relative 'word_guessing'
 
-describe Word_Guessing do
+RSpec.describe Word_Guessing do
 
-let(:game) { Word_Guessing.new('parrot') }
+  let(:game) { Word_Guessing.new('parrot') }
 
   it 'reduce the number of available guesses by 1' do
     game.available_guesses = 5
