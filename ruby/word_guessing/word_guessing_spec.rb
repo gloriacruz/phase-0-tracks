@@ -62,8 +62,9 @@ describe Word_Guessing do
     expect(game.try_guess(user_input)).to be true
   end
 
+  it 'user did not enter a guess' do
+    user_input = ""
+    expect(game.try_guess(user_input)).to be false
+  end
+
 end
-
-
-#test no word
-#test no guess or empty guess
