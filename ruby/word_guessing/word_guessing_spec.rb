@@ -9,13 +9,13 @@ describe Word_Guessing do
     expect(game.deduct_available_guesses).to eq 4
   end
 
-  it 'it is not a repeated guess' do
+  it 'check that it is not a repeated guess' do
     game.prev_guesses = ['a','b','c']
     user_input = 'p'
     expect(game.is_repeated_guess(user_input)).to be false
   end
 
-  it 'it is a repeated guess' do
+  it 'check that it is a repeated guess' do
     game.prev_guesses = ['a','b','c']
     user_input = 'a'
     expect(game.is_repeated_guess(user_input)).to be true
@@ -23,12 +23,12 @@ describe Word_Guessing do
 
   it 'the secret word is not complete' do
     game.current_state = 'parro_'
-    expect(game.is_word_complete).to be false
+    expect(game.is_word_complete()).to be false
   end
 
   it 'the secret word is complete' do
     game.current_state = 'parrot'
-    expect(game.is_word_complete).to be true
+    expect(game.is_word_complete()).to be true
   end
 
   it 'update current state' do
