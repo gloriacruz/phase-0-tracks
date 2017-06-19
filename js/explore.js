@@ -15,5 +15,12 @@ function reverse(string) {
   return reversedString;
 }
 
-var originalString = "Hello"
-console.log("Original string: " + originalString + " Reversed string: " + reverse(originalString))
+// DRIVER CODE
+var originalString = "Hello my friend";
+if(originalString != null && originalString.length > 0){
+  var reversedString = reverse(originalString);
+  console.log("Original string: " + originalString + " | Reversed string: " + reversedString);
+}
+else{
+  console.log("Incorrect string!")
+}
