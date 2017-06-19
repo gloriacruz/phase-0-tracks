@@ -16,7 +16,7 @@ function reverse(string) {
 }
 
 // DRIVER CODE
-var originalString = "Hello my friend";
+var originalString = "Hello my friendif";
 if(originalString != null && originalString.length > 0){
   var reversedString = reverse(originalString);
   console.log("Original string: " + originalString + " | Reversed string: " + reversedString);
