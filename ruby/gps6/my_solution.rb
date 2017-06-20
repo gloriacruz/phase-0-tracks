@@ -93,3 +93,18 @@ end
 
 #=======================================================================
 # Reflection Section
+
+# What are the differences between the two different hash syntaxes shown in the state_data file?
+# In the state_data file, there are two types of hashes. The outer hash uses rocket notation, because the keys are intended to be printed on screen. So the keys are strings and the values are hashes. The sub hashes use symbols for the keys because they are just used to repeatedly access the values attached to them.
+
+# What does require_relative do? How is it different from require?
+# Require relative tells the file where to look for the other file with respect to where the calling file is. Require, on the other hand, needs the full path of the file.
+
+# What are some ways to iterate through a hash?
+# We can use .each like in our example. We can also use .map.
+
+# When refactoring virus_effects, what stood out to you about the variables, if anything?
+# That initially, we were passing the instance variables (attributes) to the other two methods when it's not necessary, because the variables are already accesible within the class.
+
+# What concept did you most solidify in this challenge?
+# The class concept in general was solidified and I learn something new about the private methods.
