@@ -19,14 +19,14 @@ class VirusPredictor
 
   # this method call the other two private methods in the class
   def virus_effects
-    predicted_deaths(@population_density, @population, @state)
-    speed_of_spread(@population_density, @state)
+    predicted_deaths
+    speed_of_spread
   end
 
   private
 
   # this method calculates the number of deaths based on a population density limits using different formulas
-  def predicted_deaths(population_density, population, state)
+  def predicted_deaths
     # predicted deaths is solely based on population density
     if @population_density >= 200
       number_of_deaths = (@population * 0.4).floor
@@ -45,7 +45,7 @@ class VirusPredictor
   end
 
   # this method calculates the speed of spread based on a population density limits usgin different values for each
-  def speed_of_spread(population_density, state) #in months
+  def speed_of_spread #in months
     # We are still perfecting our formula here. The speed is also affected
     # by additional factors we haven't added into this functionality.
     speed = 0.0
