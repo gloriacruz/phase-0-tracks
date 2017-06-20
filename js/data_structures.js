@@ -1,3 +1,4 @@
+// RELEASE 0
 var colors = ["blue", "pink", "yellow", "fire red"];
 
 var names = ["Mike", "Lucky", "Winner", "Cruz"];
@@ -8,6 +9,7 @@ names.push("Champion");
 console.log(colors)
 console.log(names)
 
+// RELEASE 1
 var horses = {};
 
 for (var i = 0; i < colors.length; i++) {
@@ -41,5 +43,7 @@ console.log(anotherCar);
 console.log("Our second car can honk:");
 anotherCar.honks();
 console.log("----------")
+
+
 
 
