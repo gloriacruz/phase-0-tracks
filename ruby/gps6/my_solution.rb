@@ -1,7 +1,7 @@
 # Virus Predictor
 
-# I worked on this challenge [by myself, with: ].
-# We spent [#] hours on this challenge.
+# I worked on this challenge with: Emmet Reza.
+# We spent 1 hour on this challenge.
 
 # EXPLANATION OF require_relative
 # require_relative in this case the location is relative to the file
