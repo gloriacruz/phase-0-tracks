@@ -112,3 +112,12 @@ console.log(key_value_match(
 console.log(key_value_match(
   {plant: "Rose", color: "pink"},
   {insect: "Ant", average_size: "0.85mm"}));
+
+
+// RELEASE 2 - Driver Code
+// console.log(generate_random_data(10))
+for(var i=1; i<=10; i++){
+  var array = generate_random_data(i)
+  console.log("Array: [" + array + "]");
+  console.log("Longest word in array: " + longest_phrase(array));
+}
