@@ -45,6 +45,19 @@ function key_value_match(object1, object2){
   return false;
 }
 
+// RELEASE 2 - Pseudocode
+// -Take the integer as desired array length
+// -Create a empty array
+// -ITERATE a total of 'array length' times, one iteration for every word needed
+//    -Get a random word length between 1 and 10
+//    -FOR every letter needed, iterate until you reach the desired word length
+//      -Generate a random alphabet character
+//      -Add the new character to the word
+//    -When the word is completed, add it to the array
+//  -When the array is completed, return the array
+
+
+
 
 // RELEASE 0 - Driver Code
 console.log(longest_phrase(["long phrase","longest phrase","longer phrase"]));
@@ -79,4 +92,3 @@ console.log(key_value_match(
 console.log(key_value_match(
   {plant: "Rose", color: "pink"},
   {insect: "Ant", average_size: "0.85mm"}));
-
