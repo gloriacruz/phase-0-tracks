@@ -19,3 +19,12 @@ function longest_phrase(array){
   }
   return array[position];
 }
+
+console.log(longest_phrase(["long phrase","longest phrase","longer phrase"]));
+console.log(longest_phrase(["elephant","tiger","chita","hippopotamus"]));
+//edge cases:
+console.log(longest_phrase(["only one phrase"]));
+console.log(longest_phrase([""]));
+console.log(longest_phrase(["same length phrases","same length phrases"]));
+
+
