@@ -22,7 +22,7 @@ function longest_phrase(array){
 }
 
 // RELEASE 1 - Pseudocode
-// NoTe: This function will analize two objects, they can have different numbers of keys, in different order or with different names.
+// NoTe: This function will analize two objects, they can have different number of keys, in different order or with different names.
 // -Take two objects to analize
 // -LOOP through each pair key-value in the first object
 //   -FOR each pair key-value in the first object:
@@ -54,4 +54,29 @@ console.log(longest_phrase(["only one phrase"]));
 console.log(longest_phrase([""]));
 console.log(longest_phrase(["same length phrases","same length phrases"]));
 
+// RELEASE 1 - Driver Code
+// true cases:
+console.log(key_value_match(
+  {name: "Steven", age: 54},
+  {name: "Tamir", age: 54}));
+console.log(key_value_match(
+  {animal: "Dog", legs: 4},
+  {animal: "Dog", legs: 3}));
+// false cases:
+console.log(key_value_match(
+  {name: "Gloria", age: 32},
+  {name: "Siena", age: 4}));
+console.log(key_value_match(
+  {animal: "Lion", color: "orange"},
+  {animal: "Zebra", color: "black and white"}));
+// special cases: different number of keys, in different order or with different names
+console.log(key_value_match(
+  {student: "Laura Doe", age: 7, grade: 2, vaccinated: true},
+  {student: "John Smith", age: 7, vaccinated: false}));
+console.log(key_value_match(
+  {product: "Milk", price: 5.50},
+  {price: 5.50, product: "Yogurt"}));
+console.log(key_value_match(
+  {plant: "Rose", color: "pink"},
+  {insect: "Ant", average_size: "0.85mm"}));
 
