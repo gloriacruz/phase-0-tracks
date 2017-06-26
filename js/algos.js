@@ -56,6 +56,26 @@ function key_value_match(object1, object2){
 //    -When the word is completed, add it to the array
 //  -When the array is completed, return the array
 
+// RELEASE 2 - Function
+function generate_random_data(array_length){
+  alphabet = "abcdefghijklmnopqrstuvwxyz"
+  array = [];
+  // FOR to generate the array
+  for(var i=0; i<array_length; i++){
+    var word_length = get_random_num(1,10);
+    var word = "";
+    // FOR to generate the word
+    for(var j=0; j<word_length; j++){
+      word = word + alphabet[get_random_num(0,25)];
+    }
+    array.push(word);
+  }
+  return array;
+}
+
+function get_random_num(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 
 
