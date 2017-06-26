@@ -32,6 +32,18 @@ function longest_phrase(array){
 // -Return false, if both loops ended without finding an equal pair
 
 // RELEASE 1 - Function
+function key_value_match(object1, object2){
+  for(var key1 in object1) {
+    for(var key2 in object2){
+      if(key1 == key2){
+        if(object1[key1] == object2[key2]){
+          return true;
+        }
+      }
+    }
+  }
+  return false;
+}
 
 
 // RELEASE 0 - Driver Code
