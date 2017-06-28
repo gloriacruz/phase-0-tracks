@@ -1,0 +1,41 @@
+1.Display the information in one table (either table is fine).
+Select * from books;
+
+1|The Da Vinci Code|Dan Brown|280|false|2003-03-28|2
+2|The Girl on the Train|Paul Hawkins|395|false|2015-01-01|2
+3|A Game of Thrones|George R.R. Martin|694|true|1996-08-01|1
+4|Pride and Prejudice|Jane Austen|272|true|1813-01-27|4
+5|The Shining|Stephen King|447|true|1977-01-28|5
+6|To Kill a Mockingbird|Harper Lee|281|false|1960-07-11|6
+7|Kite Runner|Khaled Hosseini|372|true|2003-05-29|6
+
+
+2.Update an item that meets some condition (you can choose a condition that makes sense).
+Update books set num_pages = 395 where title="The Girl on the Train";
+
+
+3.Display the information in both tables using one query.
+Select * from books, genre where books.genre_id = genre.id;
+
+1|The Da Vinci Code|Dan Brown|280|false|2003-03-28|2|2|Mystery
+2|The Girl on the Train|Paul Hawkins|395|false|2015-01-01|2|2|Mystery
+3|A Game of Thrones|George R.R. Martin|694|true|1996-08-01|1|1|Fantasy
+4|Pride and Prejudice|Jane Austen|272|true|1813-01-27|4|4|Romance
+5|The Shining|Stephen King|447|true|1977-01-28|5|5|Horror
+6|To Kill a Mockingbird|Harper Lee|281|false|1960-07-11|6|6|Drama
+7|Kite Runner|Khaled Hosseini|372|true|2003-05-29|6|6|Drama
+
+
+4.Display a narrower selection of columns (fewer columns than all of them, in other words) from both tables using one query.
+Select books.title, books.author, genre.name from books, genre where books.genre_id = genre.id;
+
+The Da Vinci Code|Dan Brown|Mystery
+The Girl on the Train|Paul Hawkins|Mystery
+A Game of Thrones|George R.R. Martin|Fantasy
+Pride and Prejudice|Jane Austen|Romance
+The Shining|Stephen King|Horror
+To Kill a Mockingbird|Harper Lee|Drama
+Kite Runner|Khaled Hosseini|Drama
+
+5.Delete an item that meets some condition (you can choose a condition that makes sense).
+Delete from books where release_date>=date("2003-01-01") and release_date<=date("2003-04-01");
