@@ -1,3 +1,5 @@
+RELEASE 2
+
 1.Display the information in one table (either table is fine).
 Select * from books;
 
@@ -39,3 +41,43 @@ Kite Runner|Khaled Hosseini|Drama
 
 5.Delete an item that meets some condition (you can choose a condition that makes sense).
 Delete from books where release_date>=date("2003-01-01") and release_date<=date("2003-04-01");
+
+RELEASE 3
+
+1. Inner Join
+SELECT b.title, b.author, g.name FROM books b INNER JOIN genre g ON b.genre_id=g.id;
+
+The Girl on the Train|Paul Hawkins|Mystery
+A Game of Thrones|George R.R. Martin|Fantasy
+Pride and Prejudice|Jane Austen|Romance
+The Shining|Stephen King|Horror
+To Kill a Mockingbird|Harper Lee|Drama
+Kite Runner|Khaled Hosseini|Drama
+
+2. Outher Join
+SELECT g.name, b.title, b.author FROM genre g LEFT OUTER JOIN books b ON g.id=b.genre_id;
+
+Fantasy|A Game of Thrones|George R.R. Martin
+Mystery|The Girl on the Train|Paul Hawkins
+Science Fiction||
+Romance|Pride and Prejudice|Jane Austen
+Horror|The Shining|Stephen King
+Drama|Kite Runner|Khaled Hosseini
+Drama|To Kill a Mockingbird|Harper Lee
+
+3. Cross Join
+SELECT b.title, g.name FROM books b CROSS JOIN genre g WHERE hardcover="false";
+
+The Girl on the Train|Fantasy
+The Girl on the Train|Mystery
+The Girl on the Train|Science Fiction
+The Girl on the Train|Romance
+The Girl on the Train|Horror
+The Girl on the Train|Drama
+To Kill a Mockingbird|Fantasy
+To Kill a Mockingbird|Mystery
+To Kill a Mockingbird|Science Fiction
+To Kill a Mockingbird|Romance
+To Kill a Mockingbird|Horror
+To Kill a Mockingbird|Drama
+
