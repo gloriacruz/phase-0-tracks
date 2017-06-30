@@ -1,0 +1,23 @@
+SELECT * FROM users, reviews, businesses WHERE users.id = reviews.user_id AND businesses.id = reviews.business_id;
+
+id          first_name  last_name   id          stars       comment      business_id  user_id     id          name
+----------  ----------  ----------  ----------  ----------  -----------  -----------  ----------  ----------  -----------
+1           Gloria      Cruz        1           5           great food!  1            1           1           Tasty Pizza
+2           Sandra      Gomez       2           4           good food!   1            2           1           Tasty Pizza
+2           Sandra      Gomez       3           3           good tacos!  2            2           2           Mateo's Tac
+
+SELECT users.first_name,users.last_name,businesses.name,reviews.stars,reviews.comment FROM users, reviews, businesses WHERE users.id = reviews.user_id AND businesses.id = reviews.business_id;
+
+first_name  last_name   name         stars       comment
+----------  ----------  -----------  ----------  -----------
+Gloria      Cruz        Tasty Pizza  5           great food!
+Sandra      Gomez       Tasty Pizza  4           good food!
+Sandra      Gomez       Mateo's Tac  3           good tacos!
+
+SELECT users.first_name,users.last_name,businesses.name,reviews.stars,reviews.comment FROM users, reviews, businesses WHERE users.id = reviews.user_id AND businesses.id = reviews.business_id AND businesses.id=1;
+
+first_name  last_name   name         stars       comment
+----------  ----------  -----------  ----------  -----------
+Gloria      Cruz        Tasty Pizza  5           great food!
+Sandra      Gomez       Tasty Pizza  4           good food!
+
