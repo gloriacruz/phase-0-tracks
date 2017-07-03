@@ -1,5 +1,20 @@
 require_relative 'crud'
 
+def add_new_recipe()
+  puts 'ADD NEW RECIPE'
+  puts '--------------'
+  puts "Title of the recipe:"
+  title = gets.chomp
+  puts "Enter the instructions:"
+  instructions = gets.chomp
+  puts "Select a category:"
+  Crud.get_all_categories.each do |category|
+    puts "#{category['id']}. #{category['name']}"
+  end
+  category_id = gets.chomp
+  Crud.add_new_recipe(title,instructions,category_id.to_i)
+end
+
 def menu()
   puts 'Welcome to My Recipe Manager!'
   puts 'Options:'
@@ -15,7 +30,7 @@ def menu()
   option = gets.chomp
   case option
     when '1'
-      Crud.add_new_recipe()
+      add_new_recipe()
     when '2'
       Crud.update_recipe()
     when '3'

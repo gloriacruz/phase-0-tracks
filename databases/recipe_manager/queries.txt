@@ -1,0 +1,51 @@
+CREATE TABLE recipes(
+  id INTEGER PRIMARY KEY,
+  title VARCHAR(255),
+  instructions text,
+  category_id INTEGER,
+  FOREIGN KEY (category_id) REFERENCES categories(id)
+);
+
+CREATE TABLE recipe_ingredients(
+  id INTEGER PRIMARY KEY,
+  quantity INTEGER,
+  recipe_id INTEGER,
+  ingredient_id INTEGER,
+  FOREIGN KEY (recipe_id) REFERENCES recipes(id),
+  FOREIGN KEY (ingredient_id) REFERENCES ingredients(id)
+);
+
+CREATE TABLE ingredients(
+  id INTEGER PRIMARY KEY,
+  name VARCHAR(255),
+  unit_measure VARCHAR(255)
+);
+
+CREATE TABLE recipe_categories(
+  id INTEGER PRIMARY KEY,
+  recipe_id INTEGER,
+  category_id INTEGER,
+  FOREIGN KEY (recipe_id) REFERENCES recipes(id),
+  FOREIGN KEY (category_id) REFERENCES categories(id)
+);
+
+CREATE TABLE categories(
+    id INTEGER PRIMARY KEY,
+    name VARCHAR(255)
+);
+
+INSERT INTO categories (name) VALUES ('Poutry');
+INSERT INTO categories (name) VALUES ('Beef');
+INSERT INTO categories (name) VALUES ('Fish');
+INSERT INTO categories (name) VALUES ('Seafood');
+INSERT INTO categories (name) VALUES ('Savory');
+INSERT INTO categories (name) VALUES ('Sweet');
+INSERT INTO categories (name) VALUES ('Dessert');
+INSERT INTO categories (name) VALUES ('Pie');
+INSERT INTO categories (name) VALUES ('Cake');
+INSERT INTO categories (name) VALUES ('Bread');
+INSERT INTO categories (name) VALUES ('Mexican');
+INSERT INTO categories (name) VALUES ('Italian');
+INSERT INTO categories (name) VALUES ('American');
+INSERT INTO categories (name) VALUES ('Asian');
+
