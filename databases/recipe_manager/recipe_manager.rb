@@ -3,17 +3,50 @@ require_relative 'crud'
 def add_new_recipe()
   puts 'ADD NEW RECIPE'
   puts '--------------'
+
   puts "Title of the recipe:"
   title = gets.chomp
+
   puts "Enter the instructions:"
   instructions = gets.chomp
+
   puts "Select a category:"
   Crud.get_all_categories.each do |category|
     puts "#{category['id']}. #{category['name']}"
   end
   category_id = gets.chomp
-  Crud.add_new_recipe(title,instructions,category_id.to_i)
+
+  new_id = Crud.add_new_recipe(title,instructions,category_id.to_i)
+
+  add_ingredients_to_recipe(new_id)
 end
+
+
+def add_ingredients_to_recipe(recipe_id)
+  loop do
+    puts 'ADD RECIPE INGREDIENTS'
+    puts '----------------------'
+
+    puts "Ingredient name:"
+    name = gets.chomp
+
+    puts "Quantity:"
+    quantity = gets.to_i
+
+    puts "Unit:"
+    Crud.get_all_units.each do |unit|
+      puts "#{unit['id']}. #{unit['unit']}"
+    end
+    unit_id = gets.to_i
+
+    Crud.add_ingredient_to_recipe(quantity,recipe_id,name,unit_id)
+
+    puts 'Do you want to add another ingredient? (y/n)'
+    input = gets.chomp
+    break if input.downcase == 'n'
+  end
+end
+
 
 def menu()
   puts 'Welcome to My Recipe Manager!'
