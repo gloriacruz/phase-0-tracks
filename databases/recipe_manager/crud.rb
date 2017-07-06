@@ -56,17 +56,22 @@ module Crud
     $db.execute("INSERT INTO recipe_ingredients (quantity,recipe_id,ingredient_id,unit_id) VALUES (?,?,?,?)", [quantity,recipe_id, ingredient_id, unit_id])
   end
 
-  def self.update_recipe()
-    puts 'Update recipe feature coming soon...'
+  def self.update_recipe(option, recipe_id, value)
+    case option
+      when '1'
+        $db.execute("UPDATE recipes SET title = ? WHERE id = ?", [value, recipe_id])
+      when '2'
+        $db.execute("UPDATE recipes SET category_id = ? WHERE id = ?", [value, recipe_id])
+      when '3'
+        $db.execute("UPDATE recipes SET instructions = ? WHERE id = ?", [value, recipe_id])
+      when '5'
+        $db.execute("DELETE FROM recipe_ingredients WHERE id = ?", [value])
+    end
   end
 
   def self.delete_recipe(recipe_id)
     $db.execute("DELETE FROM recipes WHERE id = ?", [recipe_id])
     $db.execute("DELETE FROM recipe_ingredients WHERE recipe_id = ?", [recipe_id])
-  end
-
-  def self.random_recipe()
-    puts 'Random recipe feature coming soon...'
   end
 
   def self.get_all_recipe_ids
@@ -82,7 +87,7 @@ module Crud
   end
 
   def self.get_recipe_ingredients(recipe_id)
-    $db.execute("SELECT ri.quantity, u.unit, i.name FROM recipe_ingredients ri INNER JOIN ingredients i INNER JOIN units u ON ri.ingredient_id = i.id AND ri.unit_id = u.id WHERE ri.recipe_id = ?", [recipe_id])
+    $db.execute("SELECT ri.id, ri.quantity, u.unit, i.name FROM recipe_ingredients ri INNER JOIN ingredients i INNER JOIN units u ON ri.ingredient_id = i.id AND ri.unit_id = u.id WHERE ri.recipe_id = ?", [recipe_id])
   end
 
   def self.search_by_title(keywords)

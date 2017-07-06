@@ -16,6 +16,6 @@ S P E C S
 - User can add ingredients to the recipes
 - User can edit recipes
 - User can delete recipes
-- User can put a recipe in different categories
+- User can assign a category to a recipe
 - User can search for recipes based on a category, ingredient or keywords
 - The program can randomly select a recipe for the user to cook

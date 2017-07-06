@@ -35,20 +35,23 @@ CREATE TABLE categories(
     name VARCHAR(255)
 );
 
-INSERT INTO categories (name) VALUES ('Poutry');
-INSERT INTO categories (name) VALUES ('Beef');
-INSERT INTO categories (name) VALUES ('Fish');
-INSERT INTO categories (name) VALUES ('Seafood');
-INSERT INTO categories (name) VALUES ('Savory');
-INSERT INTO categories (name) VALUES ('Sweet');
+INSERT INTO categories (name) VALUES ('American');
+INSERT INTO categories (name) VALUES ('Mexican');
+INSERT INTO categories (name) VALUES ('Italian');
+INSERT INTO categories (name) VALUES ('Asian');
+INSERT INTO categories (name) VALUES ('Middle-Eastern');
+INSERT INTO categories (name) VALUES ('Vegetarian');
+INSERT INTO categories (name) VALUES ('Gluten Free');
 INSERT INTO categories (name) VALUES ('Dessert');
 INSERT INTO categories (name) VALUES ('Pie');
 INSERT INTO categories (name) VALUES ('Cake');
 INSERT INTO categories (name) VALUES ('Bread');
-INSERT INTO categories (name) VALUES ('Mexican');
-INSERT INTO categories (name) VALUES ('Italian');
-INSERT INTO categories (name) VALUES ('American');
-INSERT INTO categories (name) VALUES ('Asian');
+INSERT INTO categories (name) VALUES ('Drink');
+INSERT INTO categories (name) VALUES ('Poutry');
+INSERT INTO categories (name) VALUES ('Beef');
+INSERT INTO categories (name) VALUES ('Fish');
+INSERT INTO categories (name) VALUES ('Seafood');
+
 
 CREATE TABLE units(
   id INTEGER PRIMARY KEY,
