@@ -69,6 +69,10 @@ module Crud
     puts 'Random recipe feature coming soon...'
   end
 
+  def self.get_all_recipe_ids
+    $db.execute("SELECT id FROM recipes")
+  end
+
   def self.get_all_recipes()
     $db.execute("SELECT r.id, r.title, c.name as category FROM recipes r INNER JOIN categories c ON r.category_id = c.id")
   end

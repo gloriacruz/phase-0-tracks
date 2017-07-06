@@ -151,6 +151,21 @@ def search_by_ingredient
   display_recipe(recipe_id)
 end
 
+def select_random_recipe
+  puts 'RANDOM RECIPE SELECTOR'
+  puts '----------------------'
+  6.times do |x|
+    puts "#{x}..."
+    sleep(0.25)
+  end
+  if RUBY_PLATFORM =~ /win32|win64|\.NET|windows|cygwin|mingw32/i
+      system('cls')
+    else
+      system('clear')
+   end
+  display_recipe(Crud.get_all_recipe_ids.sample['id'])
+end
+
 def menu()
   puts 'Welcome to My Recipe Manager!'
   puts 'Options:'
@@ -159,7 +174,7 @@ def menu()
   puts '2. Update recipe'
   puts '3. Delete recipe'
   puts '4. Search recipe'
-  puts '5. Select recipe randomly'
+  puts '5. Select random recipe'
   puts '6. See recipe list'
   puts '---------------------------------'
   puts 'Type option number'
@@ -174,7 +189,7 @@ def menu()
     when '4'
       search_recipe
     when '5'
-      Crud.random_recipe()
+      select_random_recipe
     when '6'
       display_all_recipe
     else
