@@ -40,7 +40,7 @@ module Crud
       # p name.downcase
       if name.downcase == ingredient_name['name'].downcase
         found = true
-        puts "Ingredient found: TRUE" #DEBUG
+        # puts "Ingredient found: TRUE"
         ingredient_id = ingredient_name['id']
         # p insert_id
         break
@@ -48,7 +48,7 @@ module Crud
     end
 
     if !found
-      puts "Inserting new ingredient" #DEBUG
+      # puts "Inserting new ingredient"
       $db.execute("INSERT INTO ingredients (name) VALUES (?)", [name])
       ingredient_id = get_last_insert_rowid()
     end

@@ -1,81 +1,93 @@
 require_relative 'crud'
 
 def add_new_recipe
+  clear_screen
   puts 'ADD NEW RECIPE'
   puts '--------------'
 
-  puts "Title of the recipe:"
+  puts ">>Title of the recipe:"
   title = gets.chomp
 
-  puts "Enter the instructions:"
+  puts ">>Enter the instructions:"
   instructions = gets.chomp
 
   puts "Categories:"
+  puts "-----------"
   Crud.get_all_categories.each do |category|
     puts "#{category['id']}. #{category['name']}"
   end
-  puts "Select a category:"
+  puts ">>Select a category:"
   category_id = gets.chomp
 
   new_id = Crud.add_new_recipe(title,instructions,category_id.to_i)
 
   add_ingredients_to_recipe(new_id)
+
+  display_recipe(new_id)
+  puts '>>The following recipe has been added!'
+
 end
 
 
 def add_ingredients_to_recipe(recipe_id)
   loop do
+    clear_screen
     puts 'ADD RECIPE INGREDIENTS'
     puts '----------------------'
 
-    puts "Ingredient name:"
+    puts ">>Ingredient name:"
     name = gets.chomp
 
-    puts "Quantity:"
+    puts ">>Quantity:"
     quantity = gets.to_i
 
     puts "Units:"
+    puts "------"
     Crud.get_all_units.each do |unit|
       puts "#{unit['id']}. #{unit['unit']}"
     end
-    puts "Select a unit of measure:"
+    puts ">>Select a unit of measure:"
     unit_id = gets.to_i
 
     Crud.add_ingredient_to_recipe(quantity,recipe_id,name,unit_id)
 
-    puts 'Do you want to add another ingredient? (y/n)'
+    puts '>>Do you want to add another ingredient? (y/n)'
     input = gets.chomp
     break if input.downcase == 'n'
   end
 end
 
 def delete_recipe
+    clear_screen
     puts 'DELETE RECIPE'
     puts '-------------'
-
     puts "Recipes:"
+    puts '--------'
     Crud.get_all_recipes.each do |recipe|
       puts "#{recipe['id']}. " + recipe['title'].capitalize + " [ #{recipe['category']} ]"
     end
-    puts 'Select a recipe to delete. Type the recipe number:'
+    puts '>>Select a recipe to delete. Type the recipe number:'
     recipe_id = gets.chomp
     Crud.delete_recipe(recipe_id)
-    puts 'The recipe has been deleted!'
+    puts '>>The recipe has been deleted!'
+    puts '>>Press any key to continue...'
+    key = gets.chomp
 end
 
 def display_all_recipe
+  clear_screen
   puts 'RECIPE CATALOG'
   puts '--------------'
-
   Crud.get_all_recipes.each do |recipe|
     puts "#{recipe['id']}. " + recipe['title'].capitalize + " [ #{recipe['category']} ]"
   end
-  puts 'Select a recipe to display. Type the recipe number:'
+  puts '>>Select a recipe to display. Type the recipe number:'
   recipe_id = gets.chomp
   display_recipe(recipe_id)
 end
 
 def display_recipe(recipe_id)
+  clear_screen
   recipe = Crud.get_recipe(recipe_id)[0]
   puts "RECIPE " + recipe['title'].capitalize
   puts '-------------------------'
@@ -84,17 +96,22 @@ def display_recipe(recipe_id)
   Crud.get_recipe_ingredients(recipe_id).each do |ingredient|
     puts "* #{ingredient['quantity']} #{ingredient['unit']} of " + ingredient['name'].capitalize
   end
-  puts "INSTRUCTIONS: " + recipe['instructions'].capitalize
+  puts "INSTRUCTIONS: "
+  puts recipe['instructions'].capitalize
+  puts '>>Press any key to continue...'
+  key = gets.chomp
 end
 
 def search_recipe
+  clear_screen
   puts 'SEARCH RECIPE'
-  puts 'Options:'
   puts '-------------'
+  puts 'Options:'
+  puts '--------'
   puts '1. Search by title'
   puts '2. Search by category'
   puts '3. Search by ingredient'
-  puts "Select one option. Type option number:"
+  puts ">>Select one option. Type option number:"
   option = gets.chomp
   case option
     when '1'
@@ -104,96 +121,110 @@ def search_recipe
     when '3'
       search_by_ingredient
     else
-      puts 'Invalid option'
+      puts '>>Invalid option!'
   end
 end
 
 def search_by_title
-  puts "Type title keywords:"
+  puts ">>Type title keywords:"
   input = gets.chomp
+  puts ""
   puts "MATCH RESULTS:"
   puts "--------------"
   Crud.search_by_title(input).each do |recipe|
     puts "#{recipe['id']}. " + recipe['title'].capitalize + " [ #{recipe['category']} ]"
   end
-  puts 'Select a recipe to display. Type the recipe number:'
+  puts '>>Select a recipe to display. Type the recipe number:'
   recipe_id = gets.chomp
   display_recipe(recipe_id)
 end
 
 def search_by_category
   puts "Categories:"
+  puts "-----------"
   Crud.get_all_categories.each do |category|
     puts "#{category['id']}. #{category['name']}"
   end
-  puts "Select a category:"
+  puts ">>Select a category:"
   category_id = gets.chomp
+  puts ""
   puts "MATCH RESULTS:"
   puts "--------------"
   Crud.search_by_category(category_id).each do |recipe|
     puts "#{recipe['id']}. " + recipe['title'].capitalize + " [ #{recipe['category']} ]"
   end
-  puts 'Select a recipe to display. Type the recipe number:'
+  puts '>>Select a recipe to display. Type the recipe number:'
   recipe_id = gets.chomp
   display_recipe(recipe_id)
 end
 
 def search_by_ingredient
-  puts "Type ingredient keyword:"
+  puts ">>Type ingredient keyword:"
   input = gets.chomp
+  puts ""
   puts "MATCH RESULTS:"
   puts "--------------"
   Crud.search_by_ingredient(input).each do |recipe|
     puts "#{recipe['id']}. " + recipe['title'].capitalize + "   contains... " + recipe['ingredient'].capitalize
   end
-  puts 'Select a recipe to display. Type the recipe number:'
+  puts '>>Select a recipe to display. Type the recipe number:'
   recipe_id = gets.chomp
   display_recipe(recipe_id)
 end
 
 def select_random_recipe
+  clear_screen
   puts 'RANDOM RECIPE SELECTOR'
   puts '----------------------'
   6.times do |x|
     puts "#{x}..."
-    sleep(0.25)
+    sleep(0.3)
   end
-  if RUBY_PLATFORM =~ /win32|win64|\.NET|windows|cygwin|mingw32/i
-      system('cls')
-    else
-      system('clear')
-   end
   display_recipe(Crud.get_all_recipe_ids.sample['id'])
 end
 
+def clear_screen
+  if RUBY_PLATFORM =~ /win32|win64|\.NET|windows|cygwin|mingw32/i
+    system('cls')
+  else
+    system('clear')
+  end
+end
+
 def menu()
-  puts 'Welcome to My Recipe Manager!'
-  puts 'Options:'
-  puts '---------------------------------'
-  puts '1. Add new recipe'
-  puts '2. Update recipe'
-  puts '3. Delete recipe'
-  puts '4. Search recipe'
-  puts '5. Select random recipe'
-  puts '6. See recipe list'
-  puts '---------------------------------'
-  puts 'Type option number'
-  option = gets.chomp
-  case option
-    when '1'
-      add_new_recipe
-    when '2'
-      Crud.update_recipe()
-    when '3'
-      delete_recipe
-    when '4'
-      search_recipe
-    when '5'
-      select_random_recipe
-    when '6'
-      display_all_recipe
-    else
-      puts 'Invalid option'
+  loop do
+    clear_screen
+    puts 'Welcome to My Recipe Manager!'
+    puts 'Options:'
+    puts '---------------------------------'
+    puts '1. Add new recipe'
+    puts '2. Update recipe'
+    puts '3. Delete recipe'
+    puts '4. Search recipe'
+    puts '5. Select random recipe'
+    puts '6. See recipe list'
+    puts '7. EXIT'
+    puts '---------------------------------'
+    puts '>>Type option number:'
+    option = gets.chomp
+    case option
+      when '1'
+        add_new_recipe
+      when '2'
+        Crud.update_recipe()
+      when '3'
+        delete_recipe
+      when '4'
+        search_recipe
+      when '5'
+        select_random_recipe
+      when '6'
+        display_all_recipe
+      when '7'
+        break
+      else
+        puts '>>Invalid option!'
+    end
   end
 end
 
