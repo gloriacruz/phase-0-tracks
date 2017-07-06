@@ -65,8 +65,8 @@ module Crud
     $db.execute("DELETE FROM recipe_ingredients WHERE recipe_id = ?", [recipe_id])
   end
 
-  def self.ramdom_recipe()
-    puts 'Ramdom recipe feature coming soon...'
+  def self.random_recipe()
+    puts 'Random recipe feature coming soon...'
   end
 
   def self.get_all_recipes()
@@ -82,6 +82,15 @@ module Crud
   end
 
   def self.search_by_title(keywords)
+    $db.execute("SELECT r.id, r.title, c.name as category FROM recipes r INNER JOIN categories c ON r.category_id = c.id WHERE r.title LIKE '%' || ? || '%'", [keywords])
+  end
+
+  def self.search_by_category(category_id)
+    $db.execute("SELECT r.id, r.title, c.name as category FROM recipes r INNER JOIN categories c ON r.category_id = c.id WHERE c.id = ?", [category_id])
+  end
+
+  def self.search_by_ingredient(keywords)
+    $db.execute("SELECT r.id, r.title, i.name as ingredient FROM recipes r INNER JOIN recipe_ingredients ri INNER JOIN ingredients i ON r.id = ri.recipe_id AND ri.ingredient_id = i.id WHERE i.name LIKE '%' || ? || '%'", [keywords])
   end
 
   def self.get_all_categories()

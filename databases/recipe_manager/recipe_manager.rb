@@ -89,19 +89,19 @@ end
 
 def search_recipe
   puts 'SEARCH RECIPE'
-  puts '-------------'
   puts 'Options:'
+  puts '-------------'
   puts '1. Search by title'
   puts '2. Search by category'
   puts '3. Search by ingredient'
   puts "Select one option. Type option number:"
   option = gets.chomp
   case option
-    when 1
+    when '1'
       search_by_title
-    when 2
+    when '2'
       search_by_category
-    when 3
+    when '3'
       search_by_ingredient
     else
       puts 'Invalid option'
@@ -109,15 +109,46 @@ def search_recipe
 end
 
 def search_by_title
-
+  puts "Type title keywords:"
+  input = gets.chomp
+  puts "MATCH RESULTS:"
+  puts "--------------"
+  Crud.search_by_title(input).each do |recipe|
+    puts "#{recipe['id']}. " + recipe['title'].capitalize + " [ #{recipe['category']} ]"
+  end
+  puts 'Select a recipe to display. Type the recipe number:'
+  recipe_id = gets.chomp
+  display_recipe(recipe_id)
 end
 
 def search_by_category
-
+  puts "Categories:"
+  Crud.get_all_categories.each do |category|
+    puts "#{category['id']}. #{category['name']}"
+  end
+  puts "Select a category:"
+  category_id = gets.chomp
+  puts "MATCH RESULTS:"
+  puts "--------------"
+  Crud.search_by_category(category_id).each do |recipe|
+    puts "#{recipe['id']}. " + recipe['title'].capitalize + " [ #{recipe['category']} ]"
+  end
+  puts 'Select a recipe to display. Type the recipe number:'
+  recipe_id = gets.chomp
+  display_recipe(recipe_id)
 end
 
 def search_by_ingredient
-
+  puts "Type ingredient keyword:"
+  input = gets.chomp
+  puts "MATCH RESULTS:"
+  puts "--------------"
+  Crud.search_by_ingredient(input).each do |recipe|
+    puts "#{recipe['id']}. " + recipe['title'].capitalize + "   contains... " + recipe['ingredient'].capitalize
+  end
+  puts 'Select a recipe to display. Type the recipe number:'
+  recipe_id = gets.chomp
+  display_recipe(recipe_id)
 end
 
 def menu()
@@ -143,7 +174,7 @@ def menu()
     when '4'
       search_recipe
     when '5'
-      Crud.ramdom_recipe()
+      Crud.random_recipe()
     when '6'
       display_all_recipe
     else
