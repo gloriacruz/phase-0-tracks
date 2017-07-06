@@ -60,20 +60,28 @@ module Crud
     puts 'Update recipe feature coming soon...'
   end
 
-  def self.delete_recipe()
-    puts 'Delete recipe feature coming soon...'
-  end
-
-  def self.search_recipe()
-    puts 'Search recipe feature coming soon...'
+  def self.delete_recipe(recipe_id)
+    $db.execute("DELETE FROM recipes WHERE id = ?", [recipe_id])
+    $db.execute("DELETE FROM recipe_ingredients WHERE recipe_id = ?", [recipe_id])
   end
 
   def self.ramdom_recipe()
     puts 'Ramdom recipe feature coming soon...'
   end
 
-  def self.see_all_recipe()
-    puts 'See all recipes feature coming soon...'
+  def self.get_all_recipes()
+    $db.execute("SELECT r.id, r.title, c.name as category FROM recipes r INNER JOIN categories c ON r.category_id = c.id")
+  end
+
+  def self.get_recipe(recipe_id)
+    $db.execute("SELECT r.title, r.instructions, c.name as category FROM recipes r INNER JOIN categories c ON r.category_id = c.id WHERE r.id = ?", [recipe_id])
+  end
+
+  def self.get_recipe_ingredients(recipe_id)
+    $db.execute("SELECT ri.quantity, u.unit, i.name FROM recipe_ingredients ri INNER JOIN ingredients i INNER JOIN units u ON ri.ingredient_id = i.id AND ri.unit_id = u.id WHERE ri.recipe_id = ?", [recipe_id])
+  end
+
+  def self.search_by_title(keywords)
   end
 
   def self.get_all_categories()
