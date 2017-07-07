@@ -7,27 +7,12 @@ module Crud
   $db.results_as_hash = true
 
   def self.add_new_recipe(title, instructions, category_id)
-    # Creates a recipes table if the program is running for the first time
-    create_table_cmd =<<-SQL
-      CREATE TABLE IF NOT EXISTS recipes(
-        id INTEGER PRIMARY KEY,
-        title VARCHAR(255),
-        instructions text,
-        category_id INTEGER,
-        FOREIGN KEY (category_id) REFERENCES categories(id)
-      )
-    SQL
-    $db.execute(create_table_cmd)
-
     $db.execute("INSERT INTO recipes (title,instructions,category_id) VALUES (?,?,?)", [title,instructions,category_id])
     return get_last_insert_rowid()
   end
 
   def self.get_last_insert_rowid()
     rowid = $db.execute("SELECT last_insert_rowid() as id")
-    # p rowid
-    # p rowid[0]
-    # p rowid[0]['id']
     return rowid[0]['id']
   end
 
@@ -36,13 +21,10 @@ module Crud
     found = false
     ingredient_id = 0
     $db.execute("SELECT * FROM ingredients").each do |ingredient_name|
-      # p ingredient_name
-      # p name.downcase
       if name.downcase == ingredient_name['name'].downcase
         found = true
         # puts "Ingredient found: TRUE"
         ingredient_id = ingredient_name['id']
-        # p insert_id
         break
       end
     end

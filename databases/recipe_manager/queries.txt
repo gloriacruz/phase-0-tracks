@@ -64,7 +64,7 @@ CREATE TABLE ingredients(
 
 CREATE TABLE recipe_ingredients(
   id INTEGER PRIMARY KEY,
-  quantity INTEGER,
+  quantity FLOAT,
   recipe_id INTEGER,
   ingredient_id INTEGER,
   unit_id INTEGER,
