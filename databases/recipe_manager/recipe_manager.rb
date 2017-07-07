@@ -13,7 +13,7 @@ def add_new_recipe
   print ">>Enter the instructions: "
   instructions = gets.chomp
 
-  new_id = Crud.add_new_recipe(title,instructions,category_id.to_i)
+  new_id = Crud.add_new_recipe(title,instructions,category_id)
 
   add_ingredients_to_recipe(new_id)
 
@@ -49,18 +49,32 @@ def select_category
   # Crud.get_all_categories.each do |category|
   #   puts "#{category['id']}. #{category['name']}"
   # end
-  categories_array = Crud.get_all_categories
+  category_id_array = []
+  categories = Crud.get_all_categories
   i = 0
-  while i < categories_array.length
-    if i+1 < categories_array.length
-      printf "%-3s %-20s %-3s %s\n", categories_array[i]['id'].to_s+".", categories_array[i]['name'], categories_array[i+1]['id'].to_s+".", categories_array[i+1]['name']
+  while i < categories.length
+    if i+1 < categories.length
+      printf "%-3s %-20s %-3s %s\n", categories[i]['id'].to_s+".", categories[i]['name'], categories[i+1]['id'].to_s+".", categories[i+1]['name']
+      category_id_array << categories[i]['id']
+      category_id_array << categories[i+1]['id']
     else
-      printf "%-3s %-20s\n", categories_array[i]['id'].to_s+".", categories_array[i]['name']
+      printf "%-3s %-20s\n", categories[i]['id'].to_s+".", categories[i]['name']
+      category_id_array << categories[i]['id']
     end
     i = i + 2
   end
-  print ">>Select a category: "
-  category_id = gets.chomp
+
+  category_id = 0
+  loop do
+    print ">>Select a category: "
+    category_id = gets.chomp.to_i
+    if category_id <= 0 || !category_id_array.include?(category_id)
+      puts '>>Invalid option!'
+    else
+      break
+    end
+  end
+
   return category_id
 end
 
@@ -71,48 +85,72 @@ def select_unit
   # Crud.get_all_units.each do |unit|
   #   puts "#{unit['id']}. #{unit['unit']}"
   # end
-  units_array = Crud.get_all_units
+  unit_id_array = []
+  units = Crud.get_all_units
   i = 0
-  while i < units_array.length
-    if i+1 < units_array.length
-      printf "%-3s %-20s %-3s %s\n", units_array[i]['id'].to_s+".", units_array[i]['unit'], units_array[i+1]['id'].to_s+".", units_array[i+1]['unit']
+  while i < units.length
+    if i+1 < units.length
+      printf "%-3s %-20s %-3s %s\n", units[i]['id'].to_s+".", units[i]['unit'], units[i+1]['id'].to_s+".", units[i+1]['unit']
+      unit_id_array << units[i]['id']
+      unit_id_array << units[i+1]['id']
     else
-      printf "%-3s %-20s\n", units_array[i]['id'].to_s+".", units_array[i]['unit']
+      printf "%-3s %-20s\n", units[i]['id'].to_s+".", units[i]['unit']
+      unit_id_array << units[i]['id']
     end
     i = i + 2
   end
 
-  print ">>Select a unit of measure: "
-  unit_id = gets.to_i
+  unit_id = 0
+  loop do
+    print ">>Select a unit of measure: "
+    unit_id = gets.chomp.to_i
+    if unit_id <= 0 || !unit_id_array.include?(unit_id)
+      puts '>>Invalid option!'
+    else
+      break
+    end
+  end
+
   return unit_id
 end
 
 def delete_recipe
-    clear_screen
-    puts 'DELETE RECIPE'
-    puts '-------------'
-    puts "Recipes:"
-    puts '--------'
-    Crud.get_all_recipes.each do |recipe|
-      puts "#{recipe['id']}. " + recipe['title'].capitalize + " [ #{recipe['category']} ]"
-    end
-    print '>>Select a recipe to delete. Type the recipe number: '
-    recipe_id = gets.chomp
-    Crud.delete_recipe(recipe_id)
-    puts '>>The recipe has been deleted!'
-    print '>>Press any key to continue...'
-    key = gets.chomp
+  clear_screen
+  puts 'DELETE RECIPE'
+  puts '-------------'
+  puts "Recipes:"
+  puts '--------'
+  Crud.get_all_recipes.each do |recipe|
+    puts "#{recipe['id']}. " + recipe['title'].capitalize + " [ #{recipe['category']} ]"
+  end
+  print '>>Select a recipe to delete. Type the recipe number: '
+  recipe_id = gets.chomp
+  Crud.delete_recipe(recipe_id)
+  puts '>>The recipe has been deleted!'
+  print '>>Press any key to continue...'
+  key = gets.chomp
 end
 
 def display_all_recipe
   clear_screen
   puts 'RECIPE CATALOG'
   puts '--------------'
+  recipe_id_array = []
   Crud.get_all_recipes.each do |recipe|
     puts "#{recipe['id']}. " + recipe['title'].capitalize + " [ #{recipe['category']} ]"
+    recipe_id_array << recipe['id']
   end
-  print '>>Select a recipe to display. Type the recipe number: '
-  recipe_id = gets.chomp
+  recipe_id = 0
+  loop do
+    print '>>Select a recipe to display. Type the recipe number: '
+    recipe_id = gets.chomp.to_i
+    if recipe_id <= 0 || !recipe_id_array.include?(recipe_id)
+      puts '>>Invalid option!'
+    else
+      break
+    end
+  end
+
   display_recipe(recipe_id)
 end
 
@@ -143,57 +181,95 @@ def search_recipe
   puts '3. Search by ingredient'
   print ">>Select one option. Type option number: "
   option = gets.chomp
+  recipes = []
   case option
     when '1'
-      search_by_title
+      recipes = search_recipes_by_title
     when '2'
-      search_by_category
+      recipes = search_recipes_by_category
     when '3'
-      search_by_ingredient
+      recipes = search_recipes_by_ingredient
     else
       puts '>>Invalid option!'
+      sleep(0.7)
+  end
+  if recipes.length > 0
+    recipe_id = select_recipe(recipes)
+    display_recipe(recipe_id)
   end
 end
 
-def search_by_title
+def select_recipe(valid_recipe_ids)
+  recipe_id = 0
+  loop do
+    print '>>Select a recipe to display. Type the recipe number: '
+    recipe_id = gets.chomp.to_i
+    if recipe_id <= 0 || !valid_recipe_ids.include?(recipe_id)
+      puts '>>Invalid option!'
+    else
+      break
+    end
+  end
+  return recipe_id
+end
+
+def search_recipes_by_title
   print ">>Type title keywords: "
   input = gets.chomp
   puts ""
   puts "MATCH RESULTS:"
   puts "--------------"
+  valid_recipe_ids = []
   Crud.search_by_title(input).each do |recipe|
     puts "#{recipe['id']}. " + recipe['title'].capitalize + " [ #{recipe['category']} ]"
+    valid_recipe_ids << recipe['id']
   end
-  print '>>Select a recipe to display. Type the recipe number: '
-  recipe_id = gets.chomp
-  display_recipe(recipe_id)
+  if valid_recipe_ids.length == 0
+    puts "No results found"
+    puts ""
+    print '>>Press any key to continue...'
+    key = gets.chomp
+  end
+  return valid_recipe_ids
 end
 
-def search_by_category
+def search_recipes_by_category
   category_id = select_category
   puts ""
   puts "MATCH RESULTS:"
   puts "--------------"
+  valid_recipe_ids = []
   Crud.search_by_category(category_id).each do |recipe|
     puts "#{recipe['id']}. " + recipe['title'].capitalize + " [ #{recipe['category']} ]"
+    valid_recipe_ids << recipe['id']
   end
-  print '>>Select a recipe to display. Type the recipe number: '
-  recipe_id = gets.chomp
-  display_recipe(recipe_id)
+  if valid_recipe_ids.length == 0
+    puts "No results found"
+    puts ""
+    print '>>Press any key to continue...'
+    key = gets.chomp
+  end
+  return valid_recipe_ids
 end
 
-def search_by_ingredient
+def search_recipes_by_ingredient
   print ">>Type ingredient keyword: "
   input = gets.chomp
   puts ""
   puts "MATCH RESULTS:"
   puts "--------------"
+  valid_recipe_ids = []
   Crud.search_by_ingredient(input).each do |recipe|
     puts "#{recipe['id']}. " + recipe['title'].capitalize + "   contains... " + recipe['ingredient'].capitalize
+    valid_recipe_ids << recipe['id']
   end
-  print '>>Select a recipe to display. Type the recipe number: '
-  recipe_id = gets.chomp
-  display_recipe(recipe_id)
+  if valid_recipe_ids.length == 0
+    puts "No results found"
+    puts ""
+    print '>>Press any key to continue...'
+    key = gets.chomp
+  end
+  return valid_recipe_ids
 end
 
 def select_random_recipe
@@ -232,15 +308,26 @@ def edit_recipe
   puts '-----------'
   puts "Recipes:"
   puts '--------'
+  recipe_id_array = []
   Crud.get_all_recipes.each do |recipe|
     puts "#{recipe['id']}. " + recipe['title'].capitalize + " [ #{recipe['category']} ]"
+    recipe_id_array << recipe['id']
   end
-  print '>>Select a recipe to edit. Type the recipe number: '
-  recipe_id = gets.chomp
+
+  recipe_id = 0
+  loop do
+    print '>>Select a recipe to edit. Type the recipe number: '
+    recipe_id = gets.chomp.to_i
+    if recipe_id <= 0 || !recipe_id_array.include?(recipe_id)
+      puts '>>Invalid option!'
+    else
+      break
+    end
+  end
 
   clear_screen
-  puts 'EDIT RECIPE'
-  puts '-----------'
+  puts 'EDIT RECIPE ' + Crud.get_recipe_title(recipe_id).to_s
+  puts '--------------------------'
   puts 'Options:'
   puts '--------'
   puts '1. Edit title'
@@ -269,6 +356,7 @@ def edit_recipe
       Crud.update_recipe(option, recipe_id, ingredient_id)
     else
       puts '>>Invalid option!'
+      sleep(0.7)
   end
   display_recipe(recipe_id)
 end
@@ -306,6 +394,7 @@ def menu()
         break
       else
         puts '>>Invalid option!'
+        sleep(0.7)
     end
   end
 end

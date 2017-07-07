@@ -82,6 +82,11 @@ module Crud
     $db.execute("SELECT r.id, r.title, c.name as category FROM recipes r INNER JOIN categories c ON r.category_id = c.id")
   end
 
+  def self.get_recipe_title(recipe_id)
+    result = $db.execute("SELECT r.title FROM recipes r WHERE r.id = ?", [recipe_id])
+    return result[0]['title']
+  end
+
   def self.get_recipe(recipe_id)
     $db.execute("SELECT r.title, r.instructions, c.name as category FROM recipes r INNER JOIN categories c ON r.category_id = c.id WHERE r.id = ?", [recipe_id])
   end
