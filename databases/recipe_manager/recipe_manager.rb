@@ -1,5 +1,8 @@
 require_relative 'crud'
 
+# This function allows the user to add a recipe to the database. It displays the final recipe.
+# Input: none
+# Output: none
 def add_new_recipe
   clear_screen
   puts 'ADD NEW RECIPE'
@@ -20,6 +23,9 @@ def add_new_recipe
   display_recipe(new_id)
 end
 
+# This function allows the user to add ingredients to a specified recipe in the database.
+# Input: recipe id
+# Output: none
 def add_ingredients_to_recipe(recipe_id)
   loop do
     clear_screen
@@ -42,6 +48,9 @@ def add_ingredients_to_recipe(recipe_id)
   end
 end
 
+# This funtion allows the user to select a category from a list of available categories.
+# Input: none
+# Output: the selected category id
 def select_category
   puts ""
   puts "Categories:"
@@ -78,6 +87,9 @@ def select_category
   return category_id
 end
 
+# This funtion allows the user to select an unit from a list of available units.
+# Input: none
+# Output: the selected unit id
 def select_unit
   puts ""
   puts "Units:"
@@ -114,6 +126,9 @@ def select_unit
   return unit_id
 end
 
+# This function allow the user to select and delete a recipe.
+# Input: none
+# Output: none
 def delete_recipe
   clear_screen
   puts 'DELETE RECIPE'
@@ -135,6 +150,9 @@ def delete_recipe
   end
 end
 
+# This function display all recipes in the database, calls select_recipe and display_recipe functions to make up the See all recipe feature
+# Input: none
+# Output: none
 def display_all_recipe
   clear_screen
   puts 'RECIPE CATALOG'
@@ -150,6 +168,9 @@ def display_all_recipe
   display_recipe(recipe_id)
 end
 
+# This function is in charge of displaying a specified recipe on screen
+# Input: recipe id
+# Output: none
 def display_recipe(recipe_id)
   return if recipe_id <= 0
   clear_screen
@@ -167,6 +188,9 @@ def display_recipe(recipe_id)
   key = gets.chomp
 end
 
+# This funtion allows the user to select a recipe from a list of valid recipes.
+# Input: array with valid recipes ids
+# Output: the selected recipe id
 def select_recipe(valid_recipe_ids)
   recipe_id = 0
   loop do
@@ -187,6 +211,9 @@ def select_recipe(valid_recipe_ids)
   return recipe_id
 end
 
+# This funtion provides the search recipe feature and search sub-menu. Displays the recipe after selectiom.
+# Input: none
+# Output: none
 def search_recipe
   clear_screen
   puts 'SEARCH RECIPE'
@@ -218,6 +245,9 @@ def search_recipe
   end
 end
 
+# This funtion searches and displays recipes based on title keywords provided by the user.
+# Input: none
+# Output: an array of the recipes ids included in the search results
 def search_recipes_by_title
   print ">>Type title keywords: "
   input = gets.chomp
@@ -238,6 +268,9 @@ def search_recipes_by_title
   return valid_recipe_ids
 end
 
+# This funtion searches and displays recipes based on a recipe category selected by the user.
+# Input: none
+# Output: an array of the recipes ids included in the search results
 def search_recipes_by_category
   category_id = select_category
   puts ""
@@ -257,6 +290,9 @@ def search_recipes_by_category
   return valid_recipe_ids
 end
 
+# This funtion searches and displays recipes based on ingredient keywords provided by the user.
+# Input: none
+# Output: an array of the recipes ids included in the search results
 def search_recipes_by_ingredient
   print ">>Type ingredient keyword: "
   input = gets.chomp
@@ -277,6 +313,9 @@ def search_recipes_by_ingredient
   return valid_recipe_ids
 end
 
+# This funtion selects and displays a random recipe.
+# Input: none
+# Output: none
 def select_random_recipe
   clear_screen
   puts 'RANDOM RECIPE SELECTOR'
@@ -288,6 +327,9 @@ def select_random_recipe
   display_recipe(Crud.get_all_recipe_ids.sample['id'])
 end
 
+# This funtion clears the screen for better visualization.
+# Input: none
+# Output: none
 def clear_screen
   if RUBY_PLATFORM =~ /win32|win64|\.NET|windows|cygwin|mingw32/i
     system('cls')
@@ -296,6 +338,9 @@ def clear_screen
   end
 end
 
+# This funtion allows the user to select an ingredient from a list of ingredients in the specified recipe.
+# Input: recipe id
+# Output: the selected ingredient id
 def select_ingredient(recipe_id)
   puts ""
   puts "Ingredients:"
@@ -307,6 +352,9 @@ def select_ingredient(recipe_id)
   ingredient_id = gets.chomp
 end
 
+# This funtion provides the edit recipe feature and edit sub-menu. Displays the recipe after changes.
+# Input: none
+# Output: none
 def edit_recipe
   clear_screen
   puts 'EDIT RECIPE'
@@ -360,6 +408,9 @@ def edit_recipe
   end
 end
 
+# Main options menu.
+# Input: none
+# Output: none
 def menu()
   loop do
     clear_screen
