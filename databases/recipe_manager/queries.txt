@@ -45,6 +45,7 @@ INSERT INTO units (unit) VALUES ('Centimeter(s)');
 INSERT INTO units (unit) VALUES ('Pinch');
 INSERT INTO units (unit) VALUES ('Dash');
 INSERT INTO units (unit) VALUES ('Piece(s)');
+INSERT INTO units (unit) VALUES ('Can(s)');
 
 
 CREATE TABLE recipes(

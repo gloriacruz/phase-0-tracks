@@ -30,7 +30,7 @@ def add_ingredients_to_recipe(recipe_id)
     name = gets.chomp
 
     print ">>Quantity: "
-    quantity = gets.to_i
+    quantity = gets.to_f
 
     unit_id = select_unit
 
