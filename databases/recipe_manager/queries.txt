@@ -1,0 +1,80 @@
+CREATE TABLE categories(
+    id INTEGER PRIMARY KEY,
+    name VARCHAR(255)
+);
+
+INSERT INTO categories (name) VALUES ('American');
+INSERT INTO categories (name) VALUES ('Mexican');
+INSERT INTO categories (name) VALUES ('Italian');
+INSERT INTO categories (name) VALUES ('Asian');
+INSERT INTO categories (name) VALUES ('Middle-Eastern');
+INSERT INTO categories (name) VALUES ('Vegetarian');
+INSERT INTO categories (name) VALUES ('Gluten Free');
+INSERT INTO categories (name) VALUES ('Dessert');
+INSERT INTO categories (name) VALUES ('Pie');
+INSERT INTO categories (name) VALUES ('Cake');
+INSERT INTO categories (name) VALUES ('Bread');
+INSERT INTO categories (name) VALUES ('Drink');
+INSERT INTO categories (name) VALUES ('Poutry');
+INSERT INTO categories (name) VALUES ('Beef');
+INSERT INTO categories (name) VALUES ('Fish');
+INSERT INTO categories (name) VALUES ('Seafood');
+
+
+CREATE TABLE units(
+  id INTEGER PRIMARY KEY,
+  unit VARCHAR(255)
+);
+
+INSERT INTO units (unit) VALUES ('Teaspoon(s)');
+INSERT INTO units (unit) VALUES ('Tablespoon(s)');
+INSERT INTO units (unit) VALUES ('Cup(s)');
+INSERT INTO units (unit) VALUES ('Fluid Ounce(s)');
+INSERT INTO units (unit) VALUES ('Pint(s)');
+INSERT INTO units (unit) VALUES ('Quart(s)');
+INSERT INTO units (unit) VALUES ('Gallon(s)');
+INSERT INTO units (unit) VALUES ('Litre(s)');
+INSERT INTO units (unit) VALUES ('Mililitre(s)');
+INSERT INTO units (unit) VALUES ('Pound(s)');
+INSERT INTO units (unit) VALUES ('Ounce(s)');
+INSERT INTO units (unit) VALUES ('Miligram(s)');
+INSERT INTO units (unit) VALUES ('Gram(s)');
+INSERT INTO units (unit) VALUES ('Kilogram(s)');
+INSERT INTO units (unit) VALUES ('Inch(es)');
+INSERT INTO units (unit) VALUES ('Centimeter(s)');
+INSERT INTO units (unit) VALUES ('Pinch');
+INSERT INTO units (unit) VALUES ('Dash');
+INSERT INTO units (unit) VALUES ('Piece(s)');
+INSERT INTO units (unit) VALUES ('Can(s)');
+
+
+CREATE TABLE recipes(
+  id INTEGER PRIMARY KEY,
+  title VARCHAR(255),
+  instructions text,
+  category_id INTEGER,
+  FOREIGN KEY (category_id) REFERENCES categories(id)
+);
+
+
+CREATE TABLE ingredients(
+  id INTEGER PRIMARY KEY,
+  name VARCHAR(255)
+);
+
+
+CREATE TABLE recipe_ingredients(
+  id INTEGER PRIMARY KEY,
+  quantity FLOAT,
+  recipe_id INTEGER,
+  ingredient_id INTEGER,
+  unit_id INTEGER,
+  FOREIGN KEY (recipe_id) REFERENCES recipes(id),
+  FOREIGN KEY (ingredient_id) REFERENCES ingredients(id),
+  FOREIGN KEY (unit_id) REFERENCES units(id)
+);
+
+
+
+
+
