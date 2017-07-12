@@ -1,0 +1,21 @@
+body {
+  background: white;
+  font-family: georgia;
+  font-size: 16px;
+  max-width: 960px;
+  min-width: 250px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-variant: small-caps;
+}
+
+#p1 {
+  border: solid 2px silver;
+}
+
+a.test {
+    font-weight: bold;
+    color: red;
+}
