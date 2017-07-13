@@ -25,17 +25,17 @@ end
 
 # write a GET route that retrieves
 # all student data
-get '/students' do
-  students = db.execute("SELECT * FROM students")
-  response = ""
-  students.each do |student|
-    response << "ID: #{student['id']}<br>"
-    response << "Name: #{student['name']}<br>"
-    response << "Age: #{student['age']}<br>"
-    response << "Campus: #{student['campus']}<br><br>"
-  end
-  response
-end
+# get '/students' do
+#   students = db.execute("SELECT * FROM students")
+#   response = ""
+#   students.each do |student|
+#     response << "ID: #{student['id']}<br>"
+#     response << "Name: #{student['name']}<br>"
+#     response << "Age: #{student['age']}<br>"
+#     response << "Campus: #{student['campus']}<br><br>"
+#   end
+#   response
+# end
 
 # write a GET route that retrieves
 # a particular student
@@ -44,3 +44,46 @@ get '/students/:id' do
   student = db.execute("SELECT * FROM students WHERE id=?", [params[:id]])[0]
   student.to_s
 end
+
+# R E L E A S E  0
+# 1. A /contact route that displays an address (you can make up the address).
+get '/contact' do
+  "<p><b>Contact Address:</b> 642 Grant Street, San Francisco, CA, 97800</p>"
+end
+
+# 2. A /great_job route that can take a person's name as a query parameter (not a route parameter) and say "Good job, [person's name]!". If the query parameter is not present, the route simply says "Good job!"
+get '/great_job' do
+  name = params[:name]
+  if name
+    "Good job, #{name}!"
+  else
+    "Good job!"
+  end
+end
+
+# 3. A route that uses route parameters to add two numbers and respond with the result. The data types are tricky here -- when will the data need to be (or arrive as) a string?
+get '/add/:value1/:value2' do
+  result = params[:value1].to_i + params[:value2].to_i
+  "The result is: #{result}"
+end
+
+# 4. Optional bonus: Make a route that allows the user to search the database in some way -- maybe for students who have a certain first name, or some other attribute. If you like, you can simply modify the home page to take a query parameter, and filter the students displayed if a query parameter is present.
+get '/students' do
+  campus = params[:campus]
+  if campus
+    students = db.execute("SELECT * FROM students WHERE campus like '%' || ? || '%'",campus)
+  else
+    students = db.execute("SELECT * FROM students")
+  end
+  response = ""
+  students.each do |student|
+    response << "ID: #{student['id']}<br>"
+    response << "Name: #{student['name']}<br>"
+    response << "Age: #{student['age']}<br>"
+    response << "Campus: #{student['campus']}<br><br>"
+  end
+
+  response
+end
+
+
