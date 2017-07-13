@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Campuses</title>
+</head>
+<body>
+  <h1>List campuses:</h1>
+  <p>Welcome to the students management system.</p>
+  <ul>
+    <% @campuses.each do |campus| %>
+      <li><%= campus['id'] %>, <%= campus['name'] %></li>
+    <% end %>
+  </ul>
+</body>
+</html>
